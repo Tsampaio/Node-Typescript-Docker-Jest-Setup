@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-back.local
+    image: telmo87/typescript-local
+    env_file:
+      - ./dev.env
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./:/app
+      - ./nodemon.json:/app/nodemon.json
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=TRUE
+    restart: unless-stopped
